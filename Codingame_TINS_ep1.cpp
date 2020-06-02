@@ -32,59 +32,61 @@ int main()
         line.copy(grid[i], width, 0);
     }
 
-    cerr<<"grid[0][0] = "<<grid[0][0]<<" | grid[0][1] = "<<grid[0][1]<<endl;
-    cerr<<"grid[1][0] = "<<grid[1][0]<<" | grid[1][1] = "<<grid[1][1]<<endl;
-    for (int j = 0; j < width; j++)
+    //CERR para diferentes tamanhos
+    for (int j = 0; j < height; j++)
     {  
-        for (int i = 0; i < height; i++)
+        for (int i = 0; i < width; i++)
         {
-            //Nó
-            int output[6] = {3, 3, 3, 3, 3, 3};
-            output [0] = i;
-            output [1] = j;
+            cerr<<"grid["<< j <<"]["<< i <<"] = "<<grid[j][i]<<" | ";
+        }
+        cerr<<endl;
+    }
 
-            //Eixo X
-            for (int k = i + 1; k < width; k++)
-            {    
-                if (grid[i][k] == '0')
-                {
-                    output[2] = k;
-                    output[3] = i;
-                    break;
-                }
-                else 
-                {
-                    output[2] = -1;
-                    output[3] = -1;
-                }
-            }
-            if(output[2] == 3)
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            if(grid[y][x] != '.')
             {
-                output[2] = -1;
-                output[3] = -1;
-            }
-
-            //Eixo Y
-            for (int k = i + 1; k < height; k++)
-            {    
-                if (grid[k][i] == '0')
+                //Nó
+                int output[6] = {3, 3, 3, 3, 3, 3};
+                output[0] = y;
+                output[1] = x;
+                //Eixo X - Para Direita
+                for(int dir = 0; dir <= width; dir++)
                 {
-                    output[4] = i;
-                    output[5] = k;
-                    break;
+                    if(grid[y][dir] != '.') //Pular celula vazia
+                    {
+                        if(grid[y][dir] == '0')
+                        {
+                            output[2] = y;
+                            output[3] = dir;
+                        {
+                            output[2] = -1;
+                            output[3] = -1;
+                        }
+                    }
                 }
-                else 
+                //Eixo Y - Para Baixo
+                for(int bai = 0; bai <= width; bai++)
                 {
-                    output[4] = '-1';
-                    output[5] = '-1';
+                    if(grid[bai][x] != '.') //Pular celula vazia
+                    {
+                        if(grid[bai][x] == '0')
+                        {
+                            output[4] = bai;
+                            output[5] = x;
+                        }
+                        else
+                        {
+                            output[4] = -1;
+                            output[5] = -1;
+                        }                        
+                    }
                 }
+                //Saida
+                cout<<output[0]<<" "<<output[1]<<" "<<output[2]<<" "<<output[3]<<" "<<output[4]<<" "<<output[5]<<endl;
             }
-            if(output[4] == 3)
-            {
-                output[4] = -1;
-                output[5] = -1;
-            }
-            cout<<output[0]<<" "<<output[1]<<" "<<output[2]<<" "<<output[3]<<" "<<output[4]<<" "<<output[5]<<endl;
         }
     }
 }
