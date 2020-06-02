@@ -52,36 +52,38 @@ int main()
                 int output[6] = {3, 3, 3, 3, 3, 3};
                 output[0] = y;
                 output[1] = x;
-                //Eixo X - Para Direita
-                for(int dir = 0; dir <= width; dir++)
-                {
-                    if(grid[y][dir] != '.') //Pular celula vazia
-                    {
-                        if(grid[y][dir] == '0')
-                        {
-                            output[2] = y;
-                            output[3] = dir;
-                        {
-                            output[2] = -1;
-                            output[3] = -1;
-                        }
-                    }
-                }
                 //Eixo Y - Para Baixo
-                for(int bai = 0; bai <= width; bai++)
+                for(int bai = 0; bai < height; bai++)
                 {
                     if(grid[bai][x] != '.') //Pular celula vazia
                     {
                         if(grid[bai][x] == '0')
                         {
-                            output[4] = bai;
-                            output[5] = x;
+                            output[2] = bai;
+                            output[3] = x;
+                        }
+                        else
+                        {
+                            output[2] = -1;
+                            output[3] = -1;
+                        }                        
+                    }
+                }
+                //Eixo X - Para Direita
+                for(int dir = 0; dir < width; dir++)
+                {
+                    if(grid[y][dir] != '.') //Pular celula vazia
+                    {
+                        if(grid[y][dir] == '0')
+                        {
+                            output[4] = y;
+                            output[5] = dir;
                         }
                         else
                         {
                             output[4] = -1;
                             output[5] = -1;
-                        }                        
+                        }
                     }
                 }
                 //Saida
